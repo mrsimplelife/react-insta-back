@@ -7,7 +7,11 @@ from django.utils import timezone
 
 
 class PostViewSet(ModelViewSet):
-    queryset = Post.objects.all()
+    queryset = (
+        Post.objects.all()
+        .select_related("author")
+        .prefetch_related("tag_set", "like_user_set")
+    )
     serializer_class = PostSerializer
     # permission_classes = [AllowAny]
 
