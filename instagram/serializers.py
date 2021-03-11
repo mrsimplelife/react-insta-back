@@ -1,4 +1,4 @@
-from instagram.models import Post
+from instagram.models import Comment, Post
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from django.contrib.auth import get_user_model
 
@@ -17,7 +17,7 @@ class PostSerializer(ModelSerializer):
 
     def is_like_field(self, instance):
         user = self.context["request"].user
-        return instance.like_user_set.filter(pk=user.pk).exists()
+        return instance.is_like_user(user)
 
     class Meta:
         model = Post
@@ -31,3 +31,11 @@ class PostSerializer(ModelSerializer):
             "tag_set",
             "is_like",
         ]
+
+
+class CommentSerializer(ModelSerializer):
+    author = AuthorSerializer(read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = ["id", "author", "message", "created_at"]

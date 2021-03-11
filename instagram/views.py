@@ -1,12 +1,28 @@
 from datetime import timedelta
-from instagram.serializers import PostSerializer
+
+from django.shortcuts import get_object_or_404
+from instagram.serializers import CommentSerializer, PostSerializer
 from django.db.models.query_utils import Q
-from instagram.models import Post
+from instagram.models import Comment, Post
 from rest_framework.viewsets import ModelViewSet
 from django.utils import timezone
 from rest_framework.decorators import action
 from rest_framework import status
 from rest_framework.response import Response
+
+
+class CommentViewSet(ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(post__pk=self.kwargs["post_pk"])
+        return qs
+
+    def perform_create(self, serializer):
+        post = get_object_or_404(Post, pk=self.kwargs["post_pk"])
+        serializer.save(author=self.request.user, post=post)
 
 
 class PostViewSet(ModelViewSet):
