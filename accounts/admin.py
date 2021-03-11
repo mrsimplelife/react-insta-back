@@ -6,4 +6,7 @@ User = get_user_model()
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ["followers"]
+
+    def followers(self, instance):
+        return instance.follower_set.all()
