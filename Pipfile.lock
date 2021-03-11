@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "902860975a05754fb09a55389e0317ca98e75bd225c619f753c68af8c51df7a9"
+            "sha256": "327dcffc0ba55fcab6d951c096294dc19770cf86cf6a25d4ebc58a045143cd63"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,6 +39,13 @@
             ],
             "index": "pypi",
             "version": "==3.7.0"
+        },
+        "django-pydenticon": {
+            "hashes": [
+                "sha256:52f03d960947bffd132841c0ee9767e50a9776402c1c6f9487ec46a137273bf5"
+            ],
+            "index": "pypi",
+            "version": "==0.2"
         },
         "djangorestframework": {
             "hashes": [
@@ -94,6 +101,12 @@
             ],
             "index": "pypi",
             "version": "==8.1.2"
+        },
+        "pydenticon": {
+            "hashes": [
+                "sha256:2ef363cdd6f4f0193ce62257486027e36884570f6140bbde51de72df321b77f1"
+            ],
+            "version": "==0.3.1"
         },
         "pyjwt": {
             "hashes": [
